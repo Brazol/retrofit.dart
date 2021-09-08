@@ -1199,12 +1199,13 @@ class RetrofitGenerator extends GeneratorForAnnotation<retrofit.RestApi> {
                   ''')
             ]).statement);
           } else if (innerType != null && _typeChecker(MultipartFile).isExactlyType(innerType)) {
+            var nullableInfix = (p.type.nullabilitySuffix == NullabilitySuffix.question) ? '?' : '';
             blocks
                 .add(refer(_dataVar).property('files').property("addAll").call([
               refer(''' 
-                  ${p.displayName}?.map((i) => MapEntry(
+                  ${p.displayName}$nullableInfix.map((i) => MapEntry(
                 '${fieldName}',
-                i))
+                i)) ${nullableInfix.isEmpty ? '' : '?? []'}
                   ''')
             ]).statement);
           } else if (innerType?.element is ClassElement) {
