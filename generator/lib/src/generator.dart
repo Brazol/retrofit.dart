@@ -1199,7 +1199,7 @@ class RetrofitGenerator extends GeneratorForAnnotation<retrofit.RestApi> {
                   ''')
             ]).statement);
           } else if (innerType != null && _typeChecker(MultipartFile).isExactlyType(innerType)) {
-            var nullableInfix = (p.type.nullabilitySuffix == NullabilitySuffix.question) ? '?' : '';
+            var nullableInfix = (p.type.nullabilitySuffix != NullabilitySuffix.question) ? '?' : '';
             blocks
                 .add(refer(_dataVar).property('files').property("addAll").call([
               refer(''' 
